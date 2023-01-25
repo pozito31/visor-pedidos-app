@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-md-3 col-12 mt-2 mb-2" *ngFor="let order of orders">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ ("label.num.order" | translate) + order.numOrder }}
+        </h5>
+        <p class="card-text">
+          <span *ngIf="!order.finished">{{
+            "label.doing.order" | translate
+          }}</span>
+          <span *ngIf="order.finished">{{
+            "label.wait.order" | translate
+          }}</span>
+        </p>
+        <button class="btn btn-block btn-primary" (click)="printOrder(order)">
+          {{ "label.print.order" | translate }}
+        </button>
+        <button
+          class="btn btn-block btn-primary"
+          (click)="finishOrder(order)"
+          [disabled]="order.finished"
+        >
+          {{ "label.finish.order" | translate }}
+        </button>
+        <button
+          class="btn btn-block btn-primary"
+          (click)="deleteOrder(order)"
+          [disabled]="!order.finished"
+        >
+          {{ "label.remove.order" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #modal_confirm let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ "label.confirm" | translate }}</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.close()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ "label.confirm.order" | translate }}
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('yes')"
+    >
+      {{ "label.yes" | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('no')"
+    >
+      {{ "label.no" | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #modal_success let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ "label.success" | translate }}</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.close()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ "label.action.success" | translate }}
+  </div>
+</ng-template>
+
+<ng-template #modal_error let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ "label.error" | translate }}</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="modal.close()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ "label.action.error" | translate }}
+  </div>
+</ng-template>

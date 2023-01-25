@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-12" *ngIf="mode == MODE_CLIENT">
+    <app-see-orders-client></app-see-orders-client>
+  </div>
+  <div class="col-12" *ngIf="mode == MODE_EMPLOYEE">
+    <app-see-orders-employee></app-see-orders-employee>
+  </div>
+  <div class="col-12" *ngIf="mode != MODE_CLIENT && mode != MODE_EMPLOYEE">
+    <p>{{ "label.app.not.configurated" | translate }}</p>
+  </div>
+</div>
